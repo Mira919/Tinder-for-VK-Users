@@ -48,6 +48,19 @@ def get_couple():
         user['bdate'] = bdate
         age_user = str((datetime.datetime.today() - datetime.datetime.strptime(user['bdate'], '%d.%m.%Y')) / 365)[:2]  # сколько пользователю лет
 
+    users = api.users.search(count=600, sex=sex, city=user['city']['id'],fields='bdate,sex,city,domain,relation')  # ищем подходящих людей count(кол-во), sex(пол), сity(город), bdate(день рождение), domain(короткие адрес)
+    for people in users['items']:
+        if not people['is_closed']:  # проверка что страница не закрыта
+            try:
+                age_people = str((datetime.datetime.today() - datetime.datetime.strptime(people['bdate'], '%d.%m.%Y')) / 365)[:2]  # сколько лет искомому человеку
+                if 6 > int(age_user) - int(age_people) > -6:  # проверка по возрасту (+- 6 лет)
+                    if people['relation'] != 4 and people['relation'] != 8 and people['relation'] != 3:  # проверка на семейное положение (не женат/замужем, не помолвлен/помолвлена, не в гражданском браке)
+                        couple.append(people)
+            except:
+                pass
+    return couple[:10]
+
+
 finish_time = datetime.datetime.now()
 run_time = finish_time - start_time
 print('Программа закончила работу')
