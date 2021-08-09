@@ -31,6 +31,23 @@ def get_user():
 
     return user[0]
 
+# ищем пару по критериям
+def get_couple():
+    user = get_user()
+    couple = []
+
+    if user['sex'] == 1:  # определить какой у пользователя пол
+        sex = 2
+    else:
+        sex = 1
+
+    try:  # проверка в правильном ли формате указана дата рождения и определение сколько пользователю лет
+        age_user = str((datetime.datetime.today() - datetime.datetime.strptime(user['bdate'], '%d.%m.%Y')) / 365)[:2]  # сколько пользователю лет
+    except:
+        bdate = input('У вас в профиле не верно указана или вообще не указана дата рождения, пожалуйста введите ее в формате ДД.ММ.ГГ: ')
+        user['bdate'] = bdate
+        age_user = str((datetime.datetime.today() - datetime.datetime.strptime(user['bdate'], '%d.%m.%Y')) / 365)[:2]  # сколько пользователю лет
+
 finish_time = datetime.datetime.now()
 run_time = finish_time - start_time
 print('Программа закончила работу')
