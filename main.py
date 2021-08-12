@@ -89,6 +89,18 @@ def get_url_photo():
         top_dict['photos'] = url_list[:3]  # добавляем 3 ссылки на фотографии
         unsorted_like.append(top_dict) # список из 10 людей, где у каждого: кол-во лайков, ссылка, топ 3 фотографии
 
+    sum_like_list.sort(reverse=True)  # сортируем по убыванию
+    while sum_like_list:  # цикл который сортирует список пар чтобы сначала шли с самым большим количеством лайков
+        for account in unsorted_like:
+            if len(sum_like_list) == 0:  # если поля лайков нет то завершить цикл
+                break
+            if account['sum_like'] == sum_like_list[0]:  # если поле лайков у человека в списке топ лайков
+                sorted_like.append(account)  # то добавляем в список
+                del (sum_like_list[0])  # удаляем поле лайков у человека
+    # for user in sorted_like:
+    #     del user['sum_like'] # удалить поле лайков при выводе
+    return sorted_like
+
 
 finish_time = datetime.datetime.now()
 run_time = finish_time - start_time
