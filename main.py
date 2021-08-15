@@ -124,3 +124,8 @@ finish_time = datetime.datetime.now()
 run_time = finish_time - start_time
 print('Программа закончила работу')
 print(f'Программа выполнялась {str(run_time)[:9]} секунды')
+
+
+if __name__ == '__main__':
+    save_to_file('couple.json')
+    # save_to_mongodb()
