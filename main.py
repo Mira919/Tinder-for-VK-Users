@@ -109,6 +109,17 @@ def save_to_file(file_name):
         json.dump(func, file, ensure_ascii=False, indent=2)
 
 
+# сохранить данные в БД MongoDB
+def save_to_mongodb():
+    client = MongoClient()
+    my_db = client['vk_api']  # создать/обратится к бд
+    couple = my_db['couple']  # создать/обратится к коллекции
+    # my_db.couple.drop()
+    for people in func:
+        couple.insert_one(people)
+    print(list(couple.find()))  # проверка
+
+
 finish_time = datetime.datetime.now()
 run_time = finish_time - start_time
 print('Программа закончила работу')
