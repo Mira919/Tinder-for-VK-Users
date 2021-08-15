@@ -1,6 +1,7 @@
 import datetime
 import vk
 import time
+import json
 
 start_time = datetime.datetime.now()
 print(f'Программа начала свою работу')
@@ -100,6 +101,12 @@ def get_url_photo():
     # for user in sorted_like:
     #     del user['sum_like'] # удалить поле лайков при выводе
     return sorted_like
+
+
+# сохранить данные в файл JSON
+def save_to_file(file_name):
+    with open(file_name, 'w', encoding='utf-8') as file:
+        json.dump(func, file, ensure_ascii=False, indent=2)
 
 
 finish_time = datetime.datetime.now()
