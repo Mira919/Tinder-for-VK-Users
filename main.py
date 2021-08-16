@@ -2,6 +2,7 @@ import datetime
 import vk
 import time
 import json
+from pymongo import MongoClient
 
 start_time = datetime.datetime.now()
 print(f'Программа начала свою работу')
@@ -102,6 +103,7 @@ def get_url_photo():
     #     del user['sum_like'] # удалить поле лайков при выводе
     return sorted_like
 
+func = get_url_photo()
 
 # сохранить данные в файл JSON
 def save_to_file(file_name):
