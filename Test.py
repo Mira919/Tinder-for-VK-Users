@@ -15,3 +15,10 @@ class TestVKAPIProgram(unittest.TestCase):
         users = main.get_couple()
         self.assertEqual(len(users), 10)
         print('Проверка получения 10 пользователей, подходящих под критерии выполнена')
+
+    # проверка получения людей противоположного пола (в данном случае нужно получать девушек для id 169989152)
+    def test_check_sex(self):
+        users = main.get_couple()
+        for user in users:
+            self.assertNotEqual(user['sex'], 2)
+        print('Проверка получения людей противоположного пола выполнена')
