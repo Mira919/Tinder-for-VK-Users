@@ -22,3 +22,14 @@ class TestVKAPIProgram(unittest.TestCase):
         for user in users:
             self.assertNotEqual(user['sex'], 2)
         print('Проверка получения людей противоположного пола выполнена')
+
+    # проверка получения людей по подходящему городу (в данном случае для Перми для id 169989152)
+    def test_check_city(self):
+        users = main.get_couple()
+        for user in users:
+            self.assertNotEqual(user['city'], 'Perm')
+        print('Проверка получения людей по подходящему городу выполнена')
+
+
+if __name__ == '__main__':
+    unittest.main()
